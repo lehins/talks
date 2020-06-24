@@ -26,8 +26,6 @@ library
                      , hvega
                      , ihaskell
                      , ihaskell-hip
-                     , ihaskell-hvega
-                     , ihaskell-juicypixels
                      , massiv
                      , massiv-io
 

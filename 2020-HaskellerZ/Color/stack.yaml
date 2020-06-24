@@ -2,32 +2,11 @@ resolver: lts-16.1
 packages:
 - .
 extra-deps:
-- /home/lehins/github/hip/hip
-- /home/lehins/github/hip/ihaskell-hip
-- github: lehins/massiv
-  commit: 4fdc959542193f95b9a5da7f44b7cc90868b68be
+- github: lehins/hip
+  commit: 1f4226a77b244d78a955536c7c163a79fd7238b8
   subdirs:
-    - massiv
-- github: lehins/massiv-io
-  commit: 3501c8930179345a634e1ad66ea7f746ba599986
-  subdirs:
-    - massiv-io
-- github: lehins/Color
-  commit: 7471d43fc1b0333e232367b8726174cefe310833
-  subdirs:
-    - Color
-
-# IHaskell realted deps
-#- ihaskell-0.10.0.2@sha256:e6717b3e1cefbe3620029832a38aee2f1ab2fd6c2d06184f2631ddb06f6225fe,6486
-- ihaskell-juicypixels-1.1.0.1@sha256:2db6b9a62b0ab111ed246b5192653c95953ed9ac6530acba86e63cf3175ae709,2620
-#- ghc-parser-0.2.1.0@sha256:f52725ceaf25fc595ad61df86329065b039dd27ac3f88ba6f9df5f181e9e33a6,1092
-#- hvega-0.4.1.1@sha256:525728a30c4e6de6340dbb1203b4fbf716b8716fa2c70634d03000b143f18488,8313
-- ihaskell-hvega-0.3.1.0@sha256:1c631155c6fc752b74015be2c08af377ce99b27a2a081358d7f863eb4138ae6d,1182
-# - github: DougBurke/hvega # using the repo because of: https://github.com/DougBurke/hvega/issues/95
-#   commit: b5fd62602d15e96a48d65f508bcdd638144926d3
-#   subdirs:
-#     - ihaskell-hvega
-# - github: gibiansky/IHaskell
-#   commit: 2318ee2a90cfc98390651657aec434586b963235
-#   subdirs:
-#     - ipython-kernel
+    - hip
+    - ihaskell-hip
+- massiv-0.5.2.0
+- massiv-io-0.3.0.1
+- Color-0.2.0
