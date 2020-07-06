@@ -2,6 +2,22 @@
 
 Material presented at various events
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [Talks](#talks)
+    - [2020 - HaskellerZ - Color in Haskell](#2020---haskellerz---color-in-haskell)
+        - [Abstract](#abstract)
+    - [2019 - Monadic Party - Haskell arrays with Massiv](#2019---monadic-party---haskell-arrays-with-massiv)
+        - [Abstract](#abstract-1)
+    - [2019 - FP Complete webinar - RIO, a standard library for Haskell](#2019---fp-complete-webinar---rio-a-standard-library-for-haskell)
+        - [Abstract](#abstract-2)
+    - [2018 - Monadic Warsaw #14 - Haskell arrays that are easy and fast](#2018---monadic-warsaw-14---haskell-arrays-that-are-easy-and-fast)
+        - [Abstract](#abstract-3)
+
+<!-- markdown-toc end -->
+
+
 ## 2020 - HaskellerZ - Color in Haskell
 
 * Talk page is on [meetup.com](https://www.meetup.com/HaskellerZ/events/271009754/)
