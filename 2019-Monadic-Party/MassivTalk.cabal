@@ -1,0 +1,148 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: d93c6e1d519127a98497612c9fedccfa2bdf673a15e3baaafbd88218b45b81b0
+
+name:           MassivTalk
+version:        0.1.0.0
+description:    Please see the README on Github at <https://github.com/lehins/MonadicParty2019>
+homepage:       https://github.com/lehins/MonadicParty2019#readme
+bug-reports:    https://github.com/lehins/MonadicParty2019/issues
+author:         Alexey Kuleshevich
+maintainer:     alexey@kuleshevi.ch
+copyright:      Alexey Kuleshevich
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/lehins/MonadicParty2019
+
+library
+  exposed-modules:
+      MassivTalk.Day1.Intro00
+      MassivTalk.Day1.Intro01_Representations
+      MassivTalk.Day1.Intro02_Index
+      MassivTalk.Day1.Intro03_DelayedVsManifest
+      MassivTalk.Day1.Intro04_Slicing
+      MassivTalk.Day1.Intro05_Monadic
+      MassivTalk.Day1.Intro06_Mutable
+      MassivTalk.Day1.Intro07_Computation
+      MassivTalk.Day1.Intro08_Random
+      MassivTalk.Day1.Intro09_Stencil
+      MassivTalk.Integral
+  other-modules:
+      Paths_MassivTalk
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      ansi-terminal
+    , base >=4.11 && <10
+    , containers
+    , massiv >=0.3.4
+    , massiv-io
+    , mersenne-random-pure64
+    , mwc-random
+    , pcg-random
+    , random
+    , random-fu
+    , random-source
+    , rvar
+    , scheduler >=1.2.0
+    , splitmix
+    , tf-random
+    , unliftio
+    , vector
+  default-language: Haskell2010
+
+executable exe
+  main-is: Main.hs
+  other-modules:
+      Paths_MassivTalk
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      MassivTalk
+    , ansi-terminal
+    , base >=4.11 && <10
+    , containers
+    , massiv
+    , massiv-io
+    , mersenne-random-pure64
+    , mwc-random
+    , pcg-random
+    , random
+    , random-fu
+    , random-source
+    , rvar
+    , scheduler >=1.2.0
+    , splitmix
+    , tf-random
+    , unliftio
+    , vector
+  default-language: Haskell2010
+
+benchmark integral
+  type: exitcode-stdio-1.0
+  main-is: Integral.hs
+  hs-source-dirs:
+      bench
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      MassivTalk
+    , ansi-terminal
+    , base >=4.11 && <10
+    , containers
+    , criterion
+    , massiv >=0.3.4
+    , massiv-io
+    , mersenne-random-pure64
+    , mwc-random
+    , pcg-random
+    , random
+    , random-fu
+    , random-source
+    , rvar
+    , scheduler >=1.2.0
+    , splitmix
+    , tf-random
+    , unliftio
+    , vector
+  default-language: Haskell2010
+
+benchmark intro
+  type: exitcode-stdio-1.0
+  main-is: Intro.hs
+  hs-source-dirs:
+      bench
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      MassivTalk
+    , ansi-terminal
+    , base >=4.11 && <10
+    , containers
+    , criterion
+    , massiv >=0.3.4
+    , massiv-io
+    , mersenne-random-pure64
+    , mwc-random
+    , pcg-random
+    , random
+    , random-fu
+    , random-source
+    , rvar
+    , scheduler >=1.2.0
+    , splitmix
+    , tf-random
+    , unliftio
+    , vector
+  default-language: Haskell2010

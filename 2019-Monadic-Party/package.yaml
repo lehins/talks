@@ -1,0 +1,87 @@
+name:                MassivTalk
+version:             0.1.0.0
+github:              lehins/MonadicParty2019
+license:             BSD3
+author:              Alexey Kuleshevich
+maintainer:          alexey@kuleshevi.ch
+copyright:           Alexey Kuleshevich
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+description:         Please see the README on Github at <https://github.com/lehins/MonadicParty2019>
+
+dependencies:
+- base >= 4.11 && < 10
+- ansi-terminal
+- containers
+- massiv >= 0.3.4
+- massiv-io
+- random
+- scheduler >= 1.2.0
+- splitmix
+- mwc-random
+- mersenne-random-pure64
+- random-fu
+- tf-random
+- pcg-random
+- rvar
+- random-source
+- vector
+- unliftio
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wpartial-fields
+- -Wredundant-constraints
+
+library:
+  source-dirs: src
+
+executables:
+  langton:
+    main:                Main.hs
+    source-dirs:         app
+    dependencies:
+    - MassivTalk
+    - massiv
+
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+
+benchmarks:
+  intro:
+    main:                Intro.hs
+    other-modules:       []
+    source-dirs:         bench
+    dependencies:
+    - MassivTalk
+    - criterion
+
+    ghc-options:
+    - -O2
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+
+
+  integral:
+    main:                Integral.hs
+    other-modules:       []
+    source-dirs:         bench
+    dependencies:
+    - MassivTalk
+    - criterion
+
+    ghc-options:
+    - -O2
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
