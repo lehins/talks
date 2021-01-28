@@ -1,7 +1,0 @@
-resolver: nightly-2021-01-20
-
-packages:
-- .
-extra-deps:
-- random-1.2.0
-- mwc-random-0.15.0.1@sha256:4b7c9e25fa74ddba63b1f67500e55ae137622a4d94e8ee9a1710c1caa89858c7,3244
