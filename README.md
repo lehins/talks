@@ -6,6 +6,8 @@ Material presented at various events
 **Table of Contents**
 
 - [Talks](#talks)
+    - [2021 - HaskellerZ - New random interface](#2021---haskellerz---new-random-interface)
+        - [Abstract](#abstract)
     - [2020 - HaskellerZ - Color in Haskell](#2020---haskellerz---color-in-haskell)
         - [Abstract](#abstract)
     - [2019 - Monadic Party - Haskell arrays with Massiv](#2019---monadic-party---haskell-arrays-with-massiv)
@@ -17,6 +19,21 @@ Material presented at various events
 
 <!-- markdown-toc end -->
 
+## 2021 - HaskellerZ - New random interface
+
+* Talk page is on [meetup.com](https://www.meetup.com/HaskellerZ/events/275826446/)
+* Related materials are in this repo: [2021-HaskellerZ](2021-HaskellerZ)
+* Recording of the talk is on [youtube.com](https://youtu.be/GGbPqSM1ADw)
+
+### Abstract
+
+This talk is about the recent addition to the interface of
+[`random`](https://github.com/haskell/random) package, the defacto package for generating
+random values in Haskell. Those recent changes include performance an usability
+improvements, which are of course briefly mentioned in the talk. However, majority of the
+time in the talk is dedicated to the stateful interface that unifies together
+pseudo-random generators that use pure state pasing and the ones that rely on a large
+mutable state.
 
 ## 2020 - HaskellerZ - Color in Haskell
 
