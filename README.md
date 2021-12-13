@@ -6,6 +6,8 @@ Material presented at various events
 **Table of Contents**
 
 - [Talks](#talks)
+    - [2021 - Haskell eXchange - Multi-dimensional Arrays that Do Not Exist](#2021---haskell-exchange---multi-dimensional-arrays-that-do-not-exist)
+        - [Abstract](#abstract)
     - [2021 - HaskellerZ - New random interface](#2021---haskellerz---new-random-interface)
         - [Abstract](#abstract)
     - [2020 - HaskellerZ - Color in Haskell](#2020---haskellerz---color-in-haskell)
@@ -18,6 +20,31 @@ Material presented at various events
         - [Abstract](#abstract-3)
 
 <!-- markdown-toc end -->
+
+## 2021 - Haskell eXchange - Multi-dimensional Arrays that Do Not Exist
+
+* Talk page is on [skillsmatter.com](https://skillsmatter.com/skillscasts/17365-multi-dimensional-arrays-that-do-not-exist)
+* Related materials are in this repo: [2021-HaskellExchange](2021-HaskellExchange)
+* Recording of the talk is on [youtube.com](https://www.youtube.com/watch?v=cPkMM7PXMlA)
+
+### Abstract
+
+The goal of this talk is to explain delayed arrays, that are available in massiv
+library, as well as their roles in fusion and parallelization of operations
+applied to multi-dimensional arrays.
+
+Immutable arrays in Haskell come with great safety properties and provide
+opportunities for a variety of optimizations. However, without fusion most
+operations on arrays do not compose efficiently due to intermediate
+allocations. Delayed arrays provide us with a reliable fusion framework, which
+is fully controlled by the user and guided by the type checker.
+
+Many operations on arrays are massively parallel, however the common Haskell
+technique of evaluating with `par` and `pseq` and relying on GHC's spark pool is not
+applicable to unboxed arrays because it relies on laziness. Combination of a
+custom scheduler and delayed arrays can help us with a solution, so we can
+benefit from multi-core parallelization.
+
 
 ## 2021 - HaskellerZ - New random interface
 
