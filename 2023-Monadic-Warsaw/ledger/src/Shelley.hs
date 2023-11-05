@@ -5,36 +5,32 @@
 
 module Shelley where
 
-
-import RIO
-import Core
 import Base
-
+import Core
+import KeyHash
+import RIO
 
 data ShelleyTxOut era = ShelleyTxOut
   { txOutAddress :: Address
   , txOutValue :: Value era
   }
-deriving instance Eq (Value era) => Eq (ShelleyTxOut era)
-deriving instance Show (Value era) => Show (ShelleyTxOut era)
 
 data ShelleyTxBody era = ShelleyTxBody
   { txBodyInputs :: Set TxIn
   , txBodyOutputs :: [TxOut era]
   }
-deriving instance Eq (TxOut era) => Eq (ShelleyTxBody era)
-deriving instance Show (TxOut era) => Show (ShelleyTxBody era)
 
 data ShelleyTx era = ShelleyTx
   { txBody :: TxBody era
-  , txWitnesses :: [Witness]
+  , txWitnesses :: Witnesses
   }
+
+deriving instance Eq (Value era) => Eq (ShelleyTxOut era)
+deriving instance Show (Value era) => Show (ShelleyTxOut era)
+deriving instance Eq (TxOut era) => Eq (ShelleyTxBody era)
+deriving instance Show (TxOut era) => Show (ShelleyTxBody era)
 deriving instance Eq (TxBody era) => Eq (ShelleyTx era)
 deriving instance Show (TxBody era) => Show (ShelleyTx era)
-
-
-
-
 
 data Shelley
 
@@ -59,16 +55,5 @@ isShelleyTxBodyBalanced
   => TxBody era
   -> (TxIn -> TxOut era)
   -> Bool
-isShelleyTxBodyBalanced body txOutLookup = consumed == produced
-  where
-    (consumed, produced) = shelleyTxBodyBalance body txOutLookup
-
-shelleyTxBodyBalance
-  :: EraTxBody era
-  => TxBody era
-  -> (TxIn -> TxOut era)
-  -> (Value era, Value era)
-shelleyTxBodyBalance body txOutLookup = (consumed, produced)
-  where
-    consumed = foldMap (view valueTxOutL . txOutLookup) (body ^. inputsTxBodyL)
-    produced = foldMap (view valueTxOutL) (body ^. outputsTxBodyL)
+isShelleyTxBodyBalanced body txOutLookup =
+  uncurry (==) $ txBodyBalance body txOutLookup

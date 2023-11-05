@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE StandaloneDeriving #-}
 {-# LANGUAGE TypeFamilies #-}
@@ -11,8 +12,9 @@ import Core
 import RIO
 import qualified RIO.Map as Map
 import Shelley hiding (ShelleyTxBody (..))
+import KeyHash
 
-newtype MultiAsset = MultiAsset (Map Hash Integer)
+newtype MultiAsset = MultiAsset (Map (KeyHash 'Minting) Integer)
   deriving (Show, Eq)
 
 instance Semigroup MultiAsset where
@@ -29,6 +31,20 @@ instance Semigroup MaryValue where
 
 instance Monoid MaryValue where
   mempty = MaryValue mempty mempty
+
+
+
+data MaryTxBody era = MaryTxBody
+  { txBodyInputs :: Set TxIn
+  , txBodyOutputs :: [TxOut era]
+  , txBodyMint :: MultiAsset
+  }
+deriving instance Eq (TxOut era) => Eq (MaryTxBody era)
+deriving instance Show (TxOut era) => Show (MaryTxBody era)
+
+class EraTxBody era => MaryEraTxBody era where
+  mintTxBodyL :: Lens' (TxBody era) MultiAsset
+
 
 data Mary
 
@@ -48,17 +64,6 @@ instance EraTx Mary where
   bodyTxL = lens txBody $ \tx body -> tx{txBody = body}
   witnessesTxL = lens txWitnesses $ \tx outs -> tx{txWitnesses = outs}
 
-data MaryTxBody era = MaryTxBody
-  { txBodyInputs :: Set TxIn
-  , txBodyOutputs :: [TxOut era]
-  , txBodyMint :: MultiAsset
-  }
-deriving instance Eq (TxOut era) => Eq (MaryTxBody era)
-deriving instance Show (TxOut era) => Show (MaryTxBody era)
-
-class EraTxBody era => MaryEraTxBody era where
-  mintTxBodyL :: Lens' (TxBody era) MultiAsset
-
 isMaryTxBodyBalanced
   :: (MaryEraTxBody era, Value era ~ MaryValue)
   => TxBody era
@@ -67,4 +72,4 @@ isMaryTxBodyBalanced
 isMaryTxBodyBalanced body txOutLookup =
   consumed == produced <> MaryValue (Coin 0) (body ^. mintTxBodyL)
   where
-    (consumed, produced) = shelleyTxBodyBalance body txOutLookup
+    (consumed, produced) = txBodyBalance body txOutLookup

@@ -28,6 +28,8 @@ library
   exposed-modules:     Byron
                      , Base
                      , Core
+                     , Hash
+                     , KeyHash
                      , Mary
                      , Shelley
 
