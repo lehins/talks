@@ -1,7 +1,7 @@
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DerivingVia #-}
 
-module Base where
+module Coin where
 
 import Data.Semigroup
 

@@ -3,7 +3,7 @@
 module Byron where
 
 import RIO
-import Base
+import Coin
 
 data TxOut = TxOut
   { txOutAddress :: Address

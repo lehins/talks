@@ -7,7 +7,7 @@
 
 module Mary where
 
-import Base
+import Coin
 import Core
 import RIO
 import qualified RIO.Map as Map

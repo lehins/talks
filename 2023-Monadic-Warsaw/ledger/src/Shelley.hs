@@ -5,7 +5,7 @@
 
 module Shelley where
 
-import Base
+import Coin
 import Core
 import KeyHash
 import RIO
