@@ -1,11 +1,4 @@
-resolver: lts-17.0
+resolver: lts-20.26
 packages:
 - .
-extra-deps:
-- random-1.2.0
-- mwc-random-0.15.0.1@sha256:4b7c9e25fa74ddba63b1f67500e55ae137622a4d94e8ee9a1710c1caa89858c7,3244
-- github: lehins/uuid
-  commit: 37fd13fe0ef53c513561be0211a70ae3acad6c42
-  subdirs:
-    - uuid
-    - uuid-types
+extra-deps: []

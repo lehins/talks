@@ -3,11 +3,11 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE RoleAnnotations #-}
+module Hash (Hash, HashAlgorithm (..), Blake2b224, Blake2b256) where
 
-module Hash where
-
-import GHC.TypeLits
-import RIO
+--import GHC.TypeLits
+import Data.ByteString
 
 ffiHashBlake2b224 :: ByteString -> ByteString
 ffiHashBlake2b224 = error "FFI binding to Libsodium"
@@ -32,20 +32,38 @@ hashBlake2b256 = HashBlake2b256 . ffiHashBlake2b256
 newtype Hash h = Hash ByteString
   deriving (Eq, Ord, Show)
 
-class KnownNat (HashSize h) => HashAlgorithm h where
-  type HashSize h :: Nat
+type role Hash nominal
+
+class HashAlgorithm h where
   hash :: ByteString -> Hash h
-  hashSize :: Proxy h -> Integer
-  hashSize _ = natVal (Proxy @(HashSize h))
 
 data Blake2b224
 
 instance HashAlgorithm Blake2b224 where
-  type HashSize Blake2b224 = 28
   hash = Hash . ffiHashBlake2b224
 
 data Blake2b256
 
 instance HashAlgorithm Blake2b256 where
-  type HashSize Blake2b256 = 32
   hash = Hash . ffiHashBlake2b256
+
+-- newtype Hash h = Hash ByteString
+--   deriving (Eq, Ord, Show)
+
+-- class KnownNat (HashSize h) => HashAlgorithm h where
+--   type HashSize h :: Nat
+--   hash :: ByteString -> Hash h
+--   hashSize :: Proxy h -> Integer
+--   hashSize _ = natVal (Proxy @(HashSize h))
+
+-- data Blake2b224
+
+-- instance HashAlgorithm Blake2b224 where
+--   type HashSize Blake2b224 = 28
+--   hash = Hash . ffiHashBlake2b224
+
+-- data Blake2b256
+
+-- instance HashAlgorithm Blake2b256 where
+--   type HashSize Blake2b256 = 32
+--   hash = Hash . ffiHashBlake2b256

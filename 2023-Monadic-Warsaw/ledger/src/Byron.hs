@@ -1,9 +1,12 @@
+{-# LANGUAGE DataKinds #-}
 {-# LANGUAGE NamedFieldPuns #-}
 
 module Byron where
 
-import RIO
-import Coin
+import Base hiding (TxIn)
+import Data.Set (Set)
+import Lens.Micro
+
 
 data TxOut = TxOut
   { txOutAddress :: Address
@@ -11,26 +14,17 @@ data TxOut = TxOut
   }
   deriving (Eq, Show)
 
-type Hash = ByteString
-type Address = Hash
-
 data TxIn = TxIn
   { txInId :: TxId
   , txInIx :: Int
   }
   deriving (Eq, Show)
 
-type TxId = Hash
-
 data TxBody = TxBody
   { txBodyInputs :: Set TxIn
   , txBodyOutputs :: [TxOut]
   }
   deriving (Eq, Show)
-
-type PublicKey = ByteString
-type Signature = ByteString
-type Witnesses = [(PublicKey, Signature)]
 
 data Tx = Tx
   { txBody :: TxBody
@@ -39,11 +33,14 @@ data Tx = Tx
   deriving (Eq, Show)
 
 isTxBodyBalanced :: TxBody -> (TxIn -> TxOut) -> Bool
-isTxBodyBalanced TxBody{txBodyInputs, txBodyOutputs} txOutLookup = consumed == produced
-  where
-    consumed = foldMap (txOutValue . txOutLookup) txBodyInputs
-    produced = foldMap txOutValue txBodyOutputs
+isTxBodyBalanced TxBody{txBodyInputs, txBodyOutputs} txOutLookup =
+  let consumed = foldMap (txOutValue . txOutLookup) txBodyInputs
+      produced = foldMap txOutValue txBodyOutputs
+   in consumed == produced
 
+txOutAddressL :: Lens' TxOut Address
+txOutAddressL = lens txOutAddress $ \txOut address -> txOut {txOutAddress = address}
 
--- Need to redefine most of the types
--- Cannot reuse all of the validations rules
+-- > let txOut' = txOut & txOutAddressL .~ "0xDEADBEEF"
+-- > txOut' .^ txOutAddressL
+-- "0xDEADBEEF"

@@ -5,10 +5,10 @@
 
 module Shelley where
 
-import Coin
+import Base
 import Core
-import KeyHash
-import RIO
+import Data.Set (Set)
+import Lens.Micro (lens)
 
 data ShelleyTxOut era = ShelleyTxOut
   { txOutAddress :: Address

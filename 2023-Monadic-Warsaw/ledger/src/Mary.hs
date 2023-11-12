@@ -7,14 +7,15 @@
 
 module Mary where
 
-import Coin
+import Base
 import Core
-import RIO
-import qualified RIO.Map as Map
-import Shelley hiding (ShelleyTxBody (..))
+import qualified Data.Map as Map
+import Data.Set (Set)
 import KeyHash
+import Lens.Micro (Lens', lens, (^.))
+import Shelley hiding (ShelleyTxBody (..))
 
-newtype MultiAsset = MultiAsset (Map (KeyHash 'Minting) Integer)
+newtype MultiAsset = MultiAsset (Map.Map (KeyHash 'Minting) Integer)
   deriving (Show, Eq)
 
 instance Semigroup MultiAsset where
@@ -32,8 +33,6 @@ instance Semigroup MaryValue where
 instance Monoid MaryValue where
   mempty = MaryValue mempty mempty
 
-
-
 data MaryTxBody era = MaryTxBody
   { txBodyInputs :: Set TxIn
   , txBodyOutputs :: [TxOut era]
@@ -44,7 +43,6 @@ deriving instance Show (TxOut era) => Show (MaryTxBody era)
 
 class EraTxBody era => MaryEraTxBody era where
   mintTxBodyL :: Lens' (TxBody era) MultiAsset
-
 
 data Mary
 
@@ -58,6 +56,9 @@ instance EraTxBody Mary where
   type TxBody Mary = MaryTxBody Mary
   inputsTxBodyL = lens txBodyInputs $ \body ins -> body{txBodyInputs = ins}
   outputsTxBodyL = lens txBodyOutputs $ \body outs -> body{txBodyOutputs = outs}
+
+instance MaryEraTxBody Mary where
+  mintTxBodyL = lens txBodyMint $ \body mint -> body{txBodyMint = mint}
 
 instance EraTx Mary where
   type Tx Mary = ShelleyTx Mary
